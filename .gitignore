@@ -1,0 +1,12 @@
+*.png
+
+*notes.txt
+
+*results*.txt
+
+code/tmp
+code/notes.txt
+code/Untitled.ipynb
+code/datasets/
+SD2C/
+cluster-seed-words/
