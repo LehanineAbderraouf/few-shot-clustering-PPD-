@@ -1,0 +1,3 @@
+[submodule "few-shot-clust"]
+	path = few-shot-clust
+	url = git@github.com:LehanineAbderraouf/few-shot-clust.git
