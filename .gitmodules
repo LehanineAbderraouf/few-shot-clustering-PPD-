@@ -1,0 +1,3 @@
+[submodule "few-shot-clustering"]
+	path = few-shot-clustering
+	url = git@github.com:LehanineAbderraouf/few-shot-clustering.git
