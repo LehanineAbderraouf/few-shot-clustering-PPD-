@@ -1,7 +1,7 @@
 *.png
 
 *notes.txt
-.vscode/
+
 *results*.txt
 few-shot-clust/
 code/tmp
@@ -13,3 +13,6 @@ cluster-seed-words/
 code/.ipynb_checkpoints/
 new_few_shot/
 .conda/
+.vscode/
+.gitignore
+.gitmodules
