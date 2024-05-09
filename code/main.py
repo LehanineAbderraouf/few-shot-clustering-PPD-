@@ -1,15 +1,16 @@
 import pickle
-from few_shot_clustering.wrappers import LLMKeyphraseClustering
 from InstructorEmbedding import INSTRUCTOR
+from models.spherical_kmeans import SphericalKMeans
+from few_shot_clustering.wrappers import LLMKeyphraseClustering
 from few_shot_clustering.eval_utils import cluster_scores
 import numpy as np
 from sentence_transformers import SentenceTransformer
-
+import importlib  
 from few_shot_clustering.dataloaders import load_clinc, load_bank77, load_tweet
 from sklearn.preprocessing import normalize
-
 from sklearn.cluster import KMeans, MiniBatchKMeans
 from sklearn.neighbors import KNeighborsClassifier
+import scipy.sparse as sp
 
 """
 Main Script for the testing of Kmeans Clustering using seed words as centroids of clusters
@@ -47,7 +48,7 @@ for dataset_name in ["clinc","bank77","tweet"]:
     # Normalize the features (emebeddings) of the documents and the seed words embeddings of the clusters
     normalized_features = normalize(features, axis=1, norm="l2")
     normalized_seed_words = normalize(seed_words_embeddings, axis=1, norm="l2")
-
+    print(normalized_features)
 
     # 1- Clustering Using Kmeans
 
@@ -67,3 +68,14 @@ for dataset_name in ["clinc","bank77","tweet"]:
     # Evaluate clustering results
 
     print(f"dataset: {dataset_name} NMI & ARI (MiniBatch KMeans): {cluster_scores(np.array(cluster_assignments_mbkm), np.array(labels))[1:]}")
+
+    # 3- Spherical Kmeans
+
+    sparse_matrix = sp.csr_matrix(normalized_features)
+    spherical_kmeans = SphericalKMeans(n_clusters=num_clusters,  init=normalized_seed_words, random_state=47)
+    cluster_assignments_spherical_kmeans = spherical_kmeans.fit_predict(sparse_matrix)
+
+    # Evaluate clustering results
+
+    print(f"dataset: {dataset_name} NMI & ARI (Spherical K-Means): {cluster_scores(np.array(cluster_assignments_spherical_kmeans), np.array(labels))[1:]}")
+    print("finish")

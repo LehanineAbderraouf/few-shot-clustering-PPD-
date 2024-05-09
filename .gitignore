@@ -1,12 +1,15 @@
 *.png
 
 *notes.txt
-
+.vscode/
 *results*.txt
-few-shot-clustering/
+few-shot-clust/
 code/tmp
 code/notes.txt
 code/Untitled.ipynb
 code/datasets/
 SD2C/
 cluster-seed-words/
+code/.ipynb_checkpoints/
+new_few_shot/
+.conda/
